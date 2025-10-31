@@ -1,0 +1,53 @@
+[BayesOptBuilder_aarch64_linux_gnu]
+git-tree-sha1 = "1bfe021b2039871111ee0a99f9f9b8c578536d60"
+    [[BayesOptBuilder_aarch64_linux_gnu.download]]
+    url = "https://github.com/jbrea/BayesOptBuilder.jl/releases/download/v0.1.0/BayesOptBuilder.v0.1.0.aarch64-linux-gnu.tar.gz"
+    sha256 = "86f4465d459e36bc28308f5cab87e2f7f245e61a54d7c85c48a6886eecee6112"
+    os = "linux"
+    arch = "aarch64"
+    libc = "glibc"
+
+[BayesOptBuilder_arm_linux_gnueabihf]
+git-tree-sha1 = "315cd96696c06fd2eb1bba3dcaeedda29071424c"
+    [[BayesOptBuilder_arm_linux_gnueabihf.download]]
+    url = "https://github.com/jbrea/BayesOptBuilder.jl/releases/download/v0.1.0/BayesOptBuilder.v0.1.0.arm-linux-gnueabihf.tar.gz"
+    sha256 = "9e2f00c601474bd0d8bfddd305eaf0bade7f5923d067b61a3540a6fb01af6b81"
+    os = "linux"
+    arch = "armv7l"
+    libc = "glibc"
+    call_abi = "eabihf"
+
+[BayesOptBuilder_i686_linux_gnu]
+git-tree-sha1 = "5024deea03a70f7b0110ade66548a8751fcb721c"
+    [[BayesOptBuilder_i686_linux_gnu.download]]
+    url = "https://github.com/jbrea/BayesOptBuilder.jl/releases/download/v0.1.0/BayesOptBuilder.v0.1.0.i686-linux-gnu.tar.gz"
+    sha256 = "ad1c6d0f944e05e38fae819a2d7d0e99911f509b40ec18d0a2f0a8a3891782bc"
+    os = "linux"
+    arch = "i686"
+    libc = "glibc"
+
+[BayesOptBuilder_powerpc64le_linux_gnu]
+git-tree-sha1 = "e76515ffcee9fc69a8096c130ceed40a82e7ea3f"
+    [[BayesOptBuilder_powerpc64le_linux_gnu.download]]
+    url = "https://github.com/jbrea/BayesOptBuilder.jl/releases/download/v0.1.0/BayesOptBuilder.v0.1.0.powerpc64le-linux-gnu.tar.gz"
+    sha256 = "5ace2d3c92537767b15a56ac1b3d127980ee95d8d72f26bd3d884b0866570da7"
+    os = "linux"
+    arch = "powerpc64le"
+    libc = "glibc"
+
+[BayesOptBuilder_x86_64_apple_darwin14]
+git-tree-sha1 = "9c78c3fa5483487f61abdeca7909ef8f058024ed"
+    [[BayesOptBuilder_x86_64_apple_darwin14.download]]
+    url = "https://github.com/jbrea/BayesOptBuilder.jl/releases/download/v0.1.0/BayesOptBuilder.v0.1.0.x86_64-apple-darwin14.tar.gz"
+    sha256 = "5d3e9adec3f0607efdb264f8c255f21285dadabb6c7c33fb034cc8aef9ac4898"
+    os = "macos"
+    arch = "x86_64"
+
+[BayesOptBuilder_x86_64_linux_gnu]
+git-tree-sha1 = "8c5b793df829570e0aa4bcf4690c42ceb922322e"
+    [[BayesOptBuilder_x86_64_linux_gnu.download]]
+    url = "https://github.com/jbrea/BayesOptBuilder.jl/releases/download/v0.1.0/BayesOptBuilder.v0.1.0.x86_64-linux-gnu.tar.gz"
+    sha256 = "0d8daff26acd4ee8d3a336dfe3b8e8922938505461220cb343b658e73df140a3"
+    os = "linux"
+    arch = "x86_64"
+    libc = "glibc"
