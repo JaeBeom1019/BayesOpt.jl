@@ -33,14 +33,11 @@ global libbayesopt = ""
 global libnlopt = ""
 
 function __init__()
-    # 현재 실행 중인 플랫폼 키를 가져옵니다.
+
     platform = Base.BinaryPlatforms.HostPlatform()
 
     tags = platform.tags
 
-    # 플랫폼에 따라 올바른 아티팩트 이름을 선택합니다.
-    # 이 로직은 원본 build.jl의 download_info 딕셔너리와 일치하며,
-    # platform.tags 딕셔너리를 직접 확인하도록 수정되었습니다.
     artifact_name = if get(tags, "os", "") == "linux" && get(tags, "arch", "") == "aarch64" && get(tags, "libc", "") == "glibc"
         "BayesOptBuilder_aarch64_linux_gnu"
     elseif get(tags, "os", "") == "linux" && get(tags, "arch", "") == "armv7l" && get(tags, "libc", "") == "glibc" && get(tags, "call_abi", "") == "eabihf"
@@ -50,49 +47,29 @@ function __init__()
     elseif get(tags, "os", "") == "linux" && get(tags, "arch", "") == "powerpc64le" && get(tags, "libc", "") == "glibc"
         "BayesOptBuilder_powerpc64le_linux_gnu"
     elseif get(tags, "os", "") == "macos" && get(tags, "arch", "") == "x86_64"
-        # 참고: 원본은 darwin14를 명시했지만, Julia 1.6+에서는
-        # 기본 MacOS(:x86_64)가 darwin14 이상과 호환됩니다.
         "BayesOptBuilder_x86_64_apple_darwin14"
     elseif get(tags, "os", "") == "linux" && get(tags, "arch", "") == "x86_64" && get(tags, "libc", "") == "glibc"
         "BayesOptBuilder_x86_64_linux_gnu"
     else
-        # 지원되지 않는 플랫폼
-        # 디버깅을 위해 tags 내용도 함께 출력하도록 수정할 수 있습니다.
         error("Your platform ($platform) is not supported by this package! Tags: $tags")
     end
 
-    # 3. 동적으로 선택된 아티팩트 이름으로 경로를 찾습니다.
-    #
-    # [수정됨] 'artifact_str' 함수는 존재하지 않습니다.
-    # 올바른 접근 방식:
-    # 1. Artifacts.toml 파일의 경로를 찾습니다.
-    # 2. 이름을 기반으로 아티팩트 해시(hash)를 조회합니다.
-    # 3. 해시를 기반으로 실제 경로(path)를 얻습니다.
-
-    # 1. Artifacts.toml 파일 경로를 가정합니다.
-    #    이 파일(BayesOpt.jl)이 'src/' 디렉토리에 있다고 가정하고
-    #    'Artifacts.toml'은 패키지 루트(상위 디렉토리)에 있다고 가정합니다.
     toml_path = joinpath(@__DIR__, "..", "Artifacts.toml")
 
     if !isfile(toml_path)
-         # 'src'에 없는 경우, 현재 디렉토리(아마도 패키지 루트?)를 확인합니다.
          toml_path = joinpath(@__DIR__, "Artifacts.toml")
          if !isfile(toml_path)
              error("Could not find Artifacts.toml. Looked in $(joinpath(@__DIR__, "..")) and $(@__DIR__)")
          end
     end
-
-    # 2. 이름을 기반으로 아티팩트 해시를 조회합니다.
     artifact_hash_val = Artifacts.artifact_hash(artifact_name, toml_path)
     
     if isnothing(artifact_hash_val)
         error("Could not find artifact entry for '$artifact_name' in $toml_path")
     end
 
-    # 3. 해시를 기반으로 실제 경로를 얻습니다.
     artifact_dir = Artifacts.artifact_path(artifact_hash_val)
 
-    # 4. 나머지 로직은 동일합니다.
     lib_dir = joinpath(artifact_dir, "lib")
 
     global libbayesopt = Libdl.find_library(["libbayesopt"], [lib_dir])
